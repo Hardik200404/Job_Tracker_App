@@ -50,11 +50,16 @@ async function get_profile(req,res){
 async function update_profile(req,res){
     const userId = verify_jwt_token(req.query.userId)
     const data_to_insert = req.body
+    const resume_file = req.file ? req.file.filename : null // Get the filename of the uploaded resume
+
+    if(resume_file){
+        data_to_insert.resume = resume_file // Add resume filename to the data
+    }
 
     const response = await update_profile_service(userId, data_to_insert)
-    if(response.error){
+    if (response.error) {
         res.status(500).send(JSON.stringify(response.error))
-    }else{
+    } else {
         res.status(201).send(JSON.stringify(response.message))
     }
 }

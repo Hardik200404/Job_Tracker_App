@@ -14,6 +14,7 @@ app.use(express.json())
 app.use(express.static('views/user_views'))
 
 require('./routes/user_routes')(app)
+require('./routes/application_routes.js')(app)
 
 app.get('/',(req,res)=>{
     // console.log("hello")

@@ -1,5 +1,6 @@
 const user_model = require('../models/user_model')
 const application_model = require('../models/application_model')
+const company_model = require('../models/company_model')
 const sequelize = require('../util/database')
 
 require('dotenv').config()
@@ -83,7 +84,15 @@ async function get_applications_service(userId){
 async function post_application_service(data_to_insert){
     try{
         await sequelize.transaction(async(t)=>{
-            await application_model.create(data_to_insert, { transaction: t })
+            const application = await application_model.create(data_to_insert, { transaction: t })
+
+            await company_model.create(
+                { 
+                    company: data_to_insert.company,
+                    appId: application.id
+                },
+                { transaction: t }
+            )
         })
         return { message: 'Application Added Successfully' }
     }catch(err){

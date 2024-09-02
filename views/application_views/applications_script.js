@@ -151,10 +151,17 @@ function display_applications(data){
     tbody.innerHTML = ''
 
     data.forEach(item=>{
-        const item_data = JSON.stringify(item)
         const row = document.createElement('tr')
+
+        let date_time = item.createdAt
+        date_time = new Date(date_time)
+        date_time = date_time.toLocaleDateString() + date_time.toLocaleTimeString()
+
         row.innerHTML = `
-            <td>${item.company ? item.company : 'N/A'}</td>
+            <td>
+                ${item.company ? item.company : 'N/A'}
+                <button class='details-btn' title='Details' onclick="get_details(${item.id})">Details</button>
+            </td>
             <td>${item.location ? item.location : 'N/A'}</td>
             <td>${item.url ? item.url : 'N/A'}</td>
             <td>${item.role ? item.role : 'N/A'}</td>
@@ -163,6 +170,7 @@ function display_applications(data){
             <td>${item.resume ? item.resume : 'N/A'}</td>
             <td>${item.cover_letter ? item.cover_letter : 'N/A'}</td>
             <td>${item.notes ? item.notes : 'N/A'}</td>
+            <td>${date_time}</td>
             <td>
                 <button class='edit-btn' title='Edit' onclick="edit_application(${item.id})">Edit</button>
                 <button class='delete-btn' title='Delete' onclick="delete_application(${item.id})">Delete</button>
@@ -206,4 +214,9 @@ function delete_application(appId){
         }
         console.log(err)
     })
+}
+
+function get_details(appId){
+    localStorage.setItem('appId', appId)
+    window.location.href = 'company_details.html'
 }

@@ -19,7 +19,10 @@
             <input id="phone" name="phone" type="tel" placeholder="+91xxxxxxxxxx" required>
 
             <lable for="resume">Resume</lable>
-            <input id="resume" name="resume" type="text" placeholder="resume">
+            <div id="resume-container">
+                <p id="current-resume">Current Resume: <span id="resume-link">None</span></p>
+                <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx">
+            </div>
 
             <lable for="cover_letter">Cover Letter</lable>
             <input id="cover_letter" name="cover_letter" type="text" placeholder="cover_letter">

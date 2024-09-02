@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Details</title>
+    <link rel="stylesheet" href="../css/form.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Company Details</h1>
+        <form id="company_form" method="post" onsubmit="handle_company_submit(event)">
+            <label for="company">Company Name</label>
+            <input id="company" name="company" type="text" placeholder="Company Name" required>
+            
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Description"></textarea>
+            
+            <label for="location">Location</label>
+            <input id="location" name="location" type="text" placeholder="Location">
+            
+            <label for="size">Size</label>
+            <input id="size" name="size" type="text" placeholder="Size">
+            
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="text" placeholder="Phone">
+            
+            <label for="job_listing">Job Listing</label>
+            <input id="job_listing" name="job_listing" type="text" placeholder="Job Listing URL">
+            
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Email">
+            
+            <label for="hr_email">HR Email</label>
+            <input id="hr_email" name="hr_email" type="email" placeholder="HR Email">
+            
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" placeholder="Notes"></textarea>
+            
+            <button type="submit">Update Details</button>
+        </form>
+    </div>
+    <script src="company_details.js"></script>
+</body>
+</html>
