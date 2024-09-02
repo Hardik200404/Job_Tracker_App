@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="../css/form.css">
+</head>
+<body>
+    <div class="container">
+        <form id="profile_form" method="post" onsubmit="handle_profile_submit(event)">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" placeholder="Name" required>
+            
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="abc@xyz.com" required>
+            
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" placeholder="+91xxxxxxxxxx" required>
+
+            <lable for="resume">Resume</lable>
+            <input id="resume" name="resume" type="text" placeholder="resume">
+
+            <lable for="cover_letter">Cover Letter</lable>
+            <input id="cover_letter" name="cover_letter" type="text" placeholder="cover_letter">
+            
+            <lable for="languages">Languages</lable>
+            <input id="languages" name="languages" type="text" placeholder="languages">
+
+            <label for="skills">Skills</label>
+            <input id="skills" name="skills" type="text" placeholder="skills">
+            
+            <label for="current_role">Current Role</label>
+            <input id="current_role" name="current_role" type="text" placeholder="current role">
+
+            <label for="experience">Experience</label>
+            <input id="experience" name="experience" type="text" placeholder="experience">           
+        
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+<script src="profile_script.js"></script>
+</html>

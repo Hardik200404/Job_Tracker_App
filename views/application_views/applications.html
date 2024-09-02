@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications</title>
+    <link rel="stylesheet" href="../css/form.css">
+</head>
+<body>
+    <div class="container">
+        <div>
+            <button onclick="window.location.href='../user_views/profile.html'">Profile</button>
+        </div>
+        <div class="form">
+            <form id="application_form">
+                <input type="hidden" id="appId" name="appId">
+
+                <label for="company">Company:</label>
+                <input type="text" id="company" name="company" required>
+        
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location">
+        
+                <label for="salary">Salary:</label>
+                <input type="number" id="salary" name="salary">
+        
+                <label for="role">Role:</label>
+                <input type="text" id="role" name="role" required>
+        
+                <label for="resume">Resume:</label>
+                <input type="text" id="resume" name="resume">
+        
+                <label for="coverLetter">Cover Letter:</label>
+                <input type="text" id="coverLetter" name="coverLetter">
+        
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="applied">Applied</option>
+                    <option value="interviewing">Interviewing</option>
+                    <option value="interviewed">Interviewed</option>
+                    <option value="got_offer">Got Offer</option>
+                </select>
+        
+                <label for="notes">Notes:</label>
+                <input id="notes" name="notes" type="text"></input>
+        
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        <!-- Add these elements to display statistics -->
+        <div class="stats_container">
+            <div id="stats">
+                <p id="total-applications">Total Applications: 0</p>
+                <p id="applications-applied">Applied: 0</p>
+                <p id="applications-interviewing">Interviewing: 0</p>
+                <p id="applications-interviewed">Interviewed: 0</p>
+                <p id="applications-got_offer">Got Offer: 0</p>
+            </div>
+        </div>
+        <div class="search_container">
+            <form id="search_form">
+                <label for="search_query">Search Application Based on Compnay, Location, Role Or Status</label>
+                <input type="text" id="search_query" placeholder="Search Application">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <!-- Search Results Section -->
+        <div class="search_results_container" id="search_results_container">
+            <span id="search_result"></span>
+        </div>
+        <span>Existing Applications</span>
+        <div class="applications">
+            <table id="applications_list">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Url</th>
+                        <th>Role</th>
+                        <th>Salary</th>
+                        <th>Status</th>
+                        <th>Resume</th>
+                        <th>Cover Letter</th>
+                        <th>Notes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script src="applications_script.js"></script>
+</html>
