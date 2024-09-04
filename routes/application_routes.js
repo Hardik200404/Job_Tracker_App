@@ -1,6 +1,7 @@
-const { get_company, edit_company } = require('../controllers/application_controller')
 const { get_applications, post_application, get_application,
-    edit_application, delete_application } = require('../controllers/user_controller')
+    edit_application, delete_application,
+    get_company, edit_company } = require('../controllers/application_controller')
+
 const set_reminder = require('../controllers/reminder_controller')
 
 module.exports = function(app){
