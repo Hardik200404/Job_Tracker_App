@@ -2,12 +2,48 @@ const application_model = require('../models/application_model')
 const company_model = require('../models/company_model')
 const sequelize = require('../util/database')
 
-async function get_applications_service(userId){
+async function get_applications_service(userId, page = 1, limit = 5, start_date = null, end_date = null){
+    const offset = (page - 1) * limit
+
+    const query_conditions = { userId: userId }
+    if(start_date && end_date){
+        // Set start_date to beginning of the day
+        const start = new Date(start_date)
+        start.setHours(0, 0, 0, 0)
+
+        // Set end_date to end of the day
+        const end = new Date(end_date)
+        end.setHours(23, 59, 59, 999)
+
+        query_conditions.createdAt = {
+            [Op.between]: [start, end]
+        }
+    }else if(start_date){
+        const start = new Date(start_date)
+        start.setHours(0, 0, 0, 0)
+        
+        query_conditions.createdAt = {
+            [Op.gte]: start
+        }
+    }else if(end_date){
+        const end = new Date(end_date)
+        end.setHours(23, 59, 59, 999)
+        
+        query_conditions.createdAt = {
+            [Op.lte]: end
+        }
+    }
+        
+
     try{
-        let db_res = await application_model.findAll({ where: { userId: userId }})
+        let db_res = await application_model.findAndCountAll({
+            where: query_conditions,
+            limit: limit,
+            offset: offset
+        })
         
         // Calculate statistics
-        const stats = db_res.reduce((acc, app) => {
+        const stats = db_res.rows.reduce((acc, app)=>{
             acc.total++
             if (app.status === 'applied') acc.applied++
             if (app.status === 'interviewing') acc.interviewing++
@@ -22,7 +58,9 @@ async function get_applications_service(userId){
             got_offer: 0
         })
         
-        return { db_res: db_res, stats: stats }
+        const total_pages = Math.ceil(db_res.count / limit)
+
+        return { db_res: db_res.rows, stats: stats, total_pages: total_pages }
     }catch(err){
         console.log(err)
         return { error: err }

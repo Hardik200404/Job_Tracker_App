@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -32,4 +33,38 @@ button {
 
 button:hover {
     background-color: #8B4513; /* Slightly darker shade on hover */
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#register, #login {
+    background-color: transparent;
+    color: #CD853F;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#register:hover, #login:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+#dynamic {
+    margin-top: 20px;
+    color: #CD853F;
+    text-align: center;
 }

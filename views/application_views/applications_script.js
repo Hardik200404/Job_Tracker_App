@@ -4,13 +4,38 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     const search_form = document.getElementById('search_form')
     search_form.addEventListener('submit', handle_search_submit)
+
+    const date_filter_form = document.getElementById('date_filter_form')
+    date_filter_form.addEventListener('submit', handle_date_filter_submit)
     
+    window.current_page = 1
+    window.total_pages = 1
+
+    // Add event listeners for pagination buttons
+    document.getElementById('prev_page').addEventListener('click', ()=>{
+        if(window.current_page > 1){
+            window.current_page--
+            fetch_applications()
+        }
+    })
+
+    document.getElementById('next_page').addEventListener('click', ()=>{
+        if(window.current_page < window.total_pages){
+            window.current_page++
+            fetch_applications()
+        }
+    })
+
     fetch_applications()
 })
 
 function fetch_applications(){
     const token = localStorage.getItem('token')
-    fetch(`http://localhost:3000/get-applications?userId=${token}`,{
+
+    const start_date = document.getElementById('start_date').value
+    const end_date = document.getElementById('end_date').value
+
+    fetch(`http://localhost:3000/get-applications?userId=${token}&page=${window.current_page}&limit=5&start_date=${start_date}&end_date=${end_date}`,{
         method: 'GET',
     }).then(response=>{
         if(response.ok){
@@ -29,6 +54,9 @@ function fetch_applications(){
         document.getElementById('applications-got_offer').textContent = `Got Offer: ${data.stats.got_offer}`
         
         display_applications(data.db_res)
+
+        window.total_pages = data.total_pages || 1
+        update_pagination_controls()
     }).catch(err=>{
         if(err.status === 500){
             alert("Server Error, Error Code: " + err.status)
@@ -219,4 +247,19 @@ function delete_application(appId){
 function get_details(appId){
     localStorage.setItem('appId', appId)
     window.location.href = 'company_details.html'
+}
+
+function update_pagination_controls(){
+    const prev_button = document.getElementById('prev_page')
+    const next_button = document.getElementById('next_page')
+
+    // Enable or disable buttons based on the current page
+    prev_button.disabled = window.current_page <= 1
+    next_button.disabled = window.current_page >= window.total_pages
+}
+
+function handle_date_filter_submit(event){
+    event.preventDefault()
+    window.current_page = 1 // Reset to first page on new filter
+    fetch_applications()
 }

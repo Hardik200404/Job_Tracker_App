@@ -7,13 +7,24 @@ const { verify_jwt_token } = require('../util/jwt')
 
 async function get_applications(req,res){
     const userId = verify_jwt_token(req.query.userId)
-    const response = await get_applications_service(userId)
+    
+    const page = parseInt(req.query.page) || 1
+    const limit = parseInt(req.query.limit) || 5
 
-    if(response.error){
-        res.status(500).send(JSON.stringify(response.error))
-    }else{
-        response.db_res = response.db_res.map(app => app.dataValues)// Extract the dataValues from each item
-        res.status(200).json(response)
+    const start_date = req.query.start_date ? new Date(req.query.start_date) : null
+    const end_date = req.query.end_date ? new Date(req.query.end_date) : null
+    
+    try{
+        const response = await get_applications_service(userId, page, limit, start_date, end_date)
+
+        if(response.error){
+            res.status(500).send(JSON.stringify(response.error))
+        }else{
+            response.db_res = response.db_res.map(app => app.dataValues) // Extract the dataValues from each item
+            res.status(200).json(response)
+        }
+    }catch(err){
+        res.status(500).send(JSON.stringify(err))
     }
 }
 

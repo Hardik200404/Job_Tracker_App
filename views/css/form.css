@@ -8,8 +8,8 @@ body {
 
 .container {
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
+    margin: auto;
+    padding: 5px;
     background-color: burlywood;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -17,7 +17,7 @@ body {
 
 button {
     background-color: #CD853F;
-    color: burlywood;
+    color: black;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -56,29 +56,51 @@ textarea {
 
 .form {
     margin-bottom: 20px;
+    width: 200%;
+    padding: 5px;
 }
 
 .stats_container {
+    margin-top: 40px;
     margin-bottom: 20px;
+    width: auto;
 }
 
 .stats_container p {
     font-size: 16px;
+    font-weight: 600;
     margin: 5px 0;
+    width: auto;
 }
 
 .search_container {
     margin-bottom: 20px;
+    width: 40%;
+    padding: 5px;
+    width: auto;
 }
 
-.search_results_container {
-    margin-bottom: 20px;
+.form-stats-search-container { 
+    display: flex;
+}
+.buttons-stats-search-container{
+    display: flex;
+    flex-direction: column;
+    padding-top: 64px;
+    justify-content: space-between;
 }
 
-.search_results_container span {
-    display: block;
-    font-size: 16px;
-    margin: 5px 0;
+.pagination-date-filter-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination-controls{
+    margin-top: 0px;
+}
+
+#date_filter_form{
+    display: flex;
 }
 
 .applications {
@@ -92,7 +114,7 @@ table {
 }
 
 table, th, td {
-    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 th, td {
@@ -102,7 +124,7 @@ th, td {
 
 thead {
     background-color: #CD853F;
-    color: burlywood;
+    color: black;
 }
 
 tbody tr:nth-child(even) {
